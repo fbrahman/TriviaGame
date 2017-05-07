@@ -1,9 +1,6 @@
 var quiz = {
     correct: 0,
     totalQuestions: 5,
-    time: 90,
-    timevar: "",
-
 
     displayQuestion: function(question) {
 
@@ -17,23 +14,36 @@ var quiz = {
 
     },
 
-    timer: function(time) {
-        let timer = time;
-        timevar = setInterval(function() {
+    timer: {
+
+        time: 90,
+        timeInter:"",
+
+       startTimer: function(time, loc){
+        let vtimer = time;
+        timeInter = setInterval(function() {
+
+            vtimer--;
             
-            timer--;
-           
-            $("#timer").html(timer);
+            quiz.timer.displayTimer(loc,vtimer);
 
-            if (timer === 0){
-            	quiz.stoptimer();
+            if (vtimer === 0) {
+                quiz.timer.stopTimer();
             };
+
         }, 1000);
+       },
 
+       stopTimer: function(){
+        clearInterval(timeInter);
+       },
+
+       displayTimer: function(loc, time){
+        $(loc).html(time);
+       }, 
     },
 
-    stoptimer: function (){
-    	clearInterval(timevar);
-    },
-
+    questions: {
+        question
+    }
 }
