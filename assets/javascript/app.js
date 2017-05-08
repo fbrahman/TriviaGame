@@ -1,14 +1,31 @@
 var quiz = {
     correct: 0,
     totalQuestions: 5,
+    questions: [
+    "question 1",
+    "question 2", 
+    "question 3", 
+    "question 4",
+    "question 5",
+    "question 6", 
+    "question 7",
+    "question 8",
+    "question 9",
+    "question 10"],
 
-    displayQuestion: function(question) {
+    displayRandQuestion: function() {
+
+        $(".questionSection").remove();
+
+        let vQuestion;
+
+        vQuestion = quiz.questions[quiz.random(0, quiz.questions.length-1)]
 
         var $elem = $(".mainSection");
 
         $elem.append(
             $("<div>", { "class": "questionSection" }).append(
-                $("<p>", { "class": "questionText", text: question})
+                $("<p>", { "class": "questionText", text: vQuestion})
             )
         );
     },
@@ -79,3 +96,13 @@ var quiz = {
     },
 
 }
+
+// Testing randomization of array.
+// var objResults = {} 
+// 	for(var i = 0; i < 1000000; i++){ 
+// 		var randomElement = quiz.questions[quiz.random(0, quiz.questions.length-1)] 
+// 		if (objResults[randomElement]){ 
+// 			objResults[randomElement]++ 
+// 		}
+// 		else{ 
+// 			objResults[randomElement] = 1 } } console.log(objResults)
