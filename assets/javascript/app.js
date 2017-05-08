@@ -4,15 +4,31 @@ var quiz = {
 
     displayQuestion: function(question) {
 
-        var $elem = $("#mainSection");
+        var $elem = $(".mainSection");
 
         $elem.append(
-            $("<div>", {"class": "questionSection"}).append(
-                $("<p>", {"class":"questionText"})
-                )
+            $("<div>", { "class": "questionSection" }).append(
+                $("<p>", { "class": "questionText", text: question})
+            )
         );
     },
 
+    displayAnswers: function(answer){
+    	var $elem = $(".mainSection");
+
+    	$elem.append(
+    		$("<div>", {"class": "answerSection"})
+    	)
+
+    	for(i = 0; i < 4; i++){
+
+    		$(".answerSection").append(
+    			$("<div>", {"class": "answer", "id":"answer"+i, text: answer+i})
+    		)
+    	}
+    	
+    },
+    
     checkUserInput: function(question, userAnswer) {
 
     },
