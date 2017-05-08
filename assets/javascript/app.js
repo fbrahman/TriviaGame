@@ -4,6 +4,13 @@ var quiz = {
 
     displayQuestion: function(question) {
 
+        var $elem = $("#mainSection");
+
+        $elem.append(
+            $("<div>", {"class": "questionSection"}).append(
+                $("<p>", {"class":"questionText"})
+                )
+        );
     },
 
     checkUserInput: function(question, userAnswer) {
@@ -14,36 +21,45 @@ var quiz = {
 
     },
 
+    chooseQuestion: function() {
+
+    },
+
+    random: function(min, max) {
+        let vnum;
+
+        vnum = Math.floor(Math.random() * (max - min + 1) + min);
+
+        return vnum;
+    },
+
     timer: {
 
         time: 90,
-        timeInter:"",
+        timeInter: "",
 
-       startTimer: function(time, loc){
-        let vtimer = time;
-        timeInter = setInterval(function() {
+        startTimer: function(time, loc) {
+            let vtimer = time;
+            timeInter = setInterval(function() {
 
-            vtimer--;
-            
-            quiz.timer.displayTimer(loc,vtimer);
+                vtimer--;
 
-            if (vtimer === 0) {
-                quiz.timer.stopTimer();
-            };
+                quiz.timer.displayTimer(loc, vtimer);
 
-        }, 1000);
-       },
+                if (vtimer === 0) {
+                    quiz.timer.stopTimer();
+                };
 
-       stopTimer: function(){
-        clearInterval(timeInter);
-       },
+            }, 1000);
+        },
 
-       displayTimer: function(loc, time){
-        $(loc).html(time);
-       }, 
+        stopTimer: function() {
+            clearInterval(timeInter);
+        },
+
+        displayTimer: function(loc, time) {
+            $(loc).html(time);
+        },
     },
 
-    questions: {
-        question
-    }
 }
