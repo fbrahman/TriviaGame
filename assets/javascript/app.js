@@ -1,36 +1,33 @@
 var quiz = {
     correct: 0,
     totalQuestions: 5,
-    questions: [
-    "question 1",
-    "question 2", 
-    "question 3", 
-    "question 4",
-    "question 5",
-    "question 6", 
-    "question 7",
-    "question 8",
-    "question 9",
-    "question 10"],
+    questionArray: [],
+    answerArray: [],
 
     displayRandQuestion: function() {
 
         $(".questionSection").remove();
 
         let vQuestion;
+        let vIndex = quiz.random(0, quiz.questionArray.length-1);
 
-        vQuestion = quiz.questions[quiz.random(0, quiz.questions.length-1)]
+        vQuestion = quiz.questionArray[vIndex].qtext
 
         var $elem = $(".mainSection");
 
         $elem.append(
             $("<div>", { "class": "questionSection" }).append(
-                $("<p>", { "class": "questionText", text: vQuestion})
+                $("<p>", { "class": "questionText", text: vQuestion, "qIndex":vIndex})
             )
         );
     },
 
-    displayAnswers: function(answer){
+    displayAnswers: function(){
+
+    	$(".answerSection").remove();
+
+    	let vIndex = $(".questionText").attr("qIndex");
+    
     	var $elem = $(".mainSection");
 
     	$elem.append(
@@ -40,7 +37,7 @@ var quiz = {
     	for(i = 0; i < 4; i++){
 
     		$(".answerSection").append(
-    			$("<div>", {"class": "answer", "id":"answer"+i, text: answer+i})
+    			$("<div>", {"class": "answer", "id":"answer"+i, text:quiz.answerArray[vIndex].atextarray[i]})
     		)
     	}
     	
@@ -94,6 +91,19 @@ var quiz = {
             $(loc).html(time);
         },
     },
+
+    questions: function (type, text, count){
+    	this.qtype = type;
+    	this.qtext = text;
+    	this.qcount = count;
+    	quiz.questionArray.push(this);
+    },
+
+    answers: function (type, text){
+    	this.atype = type;
+    	this.atextarray = text;
+    	quiz.answerArray.push(this);
+    }
 
 }
 
