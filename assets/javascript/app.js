@@ -3,10 +3,12 @@ var quiz = {
     totalQuestions: 5,
     questionArray: [],
     answerArray: [],
+    choicesArray: [],
 
     displayRandQuestion: function() {
 
         $(".questionSection").remove();
+        $(".answerSection").remove();
 
         let vQuestion;
         let vIndex = quiz.random(0, quiz.questionArray.length-1);
@@ -27,31 +29,90 @@ var quiz = {
     	$(".answerSection").remove();
 
     	let vIndex = $(".questionText").attr("qIndex");
+    	let vCorrectAnsdone = 0;
+    	let vIncorrectAnsdone = 0;
     
     	var $elem = $(".mainSection");
 
     	$elem.append(
     		$("<div>", {"class": "answerSection"})
-    	)
+    	);
 
-    	for(i = 0; i < 4; i++){
+    	// for(i = 0; i < 4; i++){
 
-    		$(".answerSection").append(
-    			$("<div>", {"class": "answer", "id":"answer"+i, text:quiz.answerArray[vIndex].atextarray[i]})
-    		)
-    	}
+    	// 	$(".answerSection").append(
+    	// 		$("<div>", {"class": "answer", "id":"answer"+i, text:quiz.answerArray[vIndex].atextarray[i]})
+    	// 	)
+    	// }
+
+    	for (i = 0; i < 8; i++){
+    		
+    		let vRandTF = quiz.random(0,1);
+    		let vCorrectRand = quiz.random(0, quiz.choicesArray.atextarray.length-1);
+    		let vIncorrectRand = quiz.random(0, Object.keys(quiz.choicesArray).length - 3);
+    		let vIncorrectTextRand = quiz.random(0, quiz.choicesArray[vIncorrectRand].atextarray.length-1);
+
+    		console.log("this is the incorrect rand", vIncorrectRand);
+    		console.log("this is the incorrect text rand", vIncorrectTextRand);
+
+    		if (vRandTF == true && vCorrectAnsdone === 0){
+    			$(".answerSection").append(
+    				$("<div>", {"class": "answer", "id":"answer"+i, text: quiz.choicesArray.atextarray[vCorrectRand]})
+    			)
+    			vCorrectAnsdone = 1;
+    		}else if (vIncorrectAnsdone < 3){
+    			$(".answerSection").append(
+    				$("<div>", {"class": "answer", "id":"answer"+i, text: quiz.choicesArray[vIncorrectRand].atextarray[vIncorrectTextRand]})
+    			);
+    			vIncorrectAnsdone++;
+    		} //else closure
+    	} //for loop closure
     	
     },
     
+    chooseAnswerOptions: function() {
+
+    	let vIndex = $(".questionText").attr("qIndex");
+    	let vQType = quiz.questionArray[vIndex].qtype;
+    	let vCorrectAnswers = [];
+    	let vIncorrectAnswers = [];
+
+    	//find correct answers array and push to vCorrectAnswers
+    	$.each(quiz.answerArray, function (index,value){
+    		// console.log(value);
+    		if(vCorrectAnswers.length !== 1){
+	    		if(quiz.answerArray[index].atype === vQType){
+	    			//vCorrectAnswers.push(value)
+	    			vCorrectAnswers = $.extend(true, {}, value);
+	    			return false;
+	    		};
+	    	}
+	    	else{
+	    		// extra protection to leave the each loop
+	    		console.log("I'm in the else loop boo!")
+	    		return false;
+	    	}
+       	});
+
+       	$.each(quiz.answerArray, function (index,value){
+       		if(quiz.answerArray[index].atype !== vQType){
+       			 var vIncorrectAnswerholder = $.extend(true,{}, value);
+       			 vIncorrectAnswers.push(vIncorrectAnswerholder);
+       		};
+       	});
+		
+		console.log(vCorrectAnswers);
+		console.log(vIncorrectAnswers);
+
+		quiz.choicesArray = $.extend(true, vCorrectAnswers,vIncorrectAnswers);
+
+    },
+
     checkUserInput: function(question, userAnswer) {
 
     },
 
     calculateScore: function(correct, totalQuestions) {
-
-    },
-
-    chooseQuestion: function() {
 
     },
 

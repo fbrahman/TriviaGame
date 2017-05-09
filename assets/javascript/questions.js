@@ -1,7 +1,7 @@
 var question1 = new quiz.questions("type1","question1",1);
 var question2 = new quiz.questions("type2","question2",2);
 var question3 = new quiz.questions("type3","question3",3);
-var question4 = new quiz.questions("type3","question4",4);
+var question4 = new quiz.questions("type4","question4",4);
 
 var answer1 = new quiz.answers("type1");
 var answer2 = new quiz.answers("type2");
