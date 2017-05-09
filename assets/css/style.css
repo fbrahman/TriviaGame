@@ -1,10 +1,10 @@
-@font-face{
+@font-face {
     font-family: adam;
     src: url(../fonts/ADAM.otf);
 }
 
-*{
-     box-sizing: border-box;
+* {
+    box-sizing: border-box;
     -moz-box-sizing: border-box;
     -o-box-sizing: border-box;
     -webkit-box-sizing: border-box;
@@ -19,12 +19,11 @@ body {
     display: flex;
     flex-direction: column;
     height: 100%;
-    font-family: 'Raleway', sans-serif; 
+    font-family: 'Raleway', sans-serif;
     /*font-family: 'Montserrat', sans-serif;*/
-
-    background-color: #fcfcfc;
+    background-color: #f2f2f2;
+    /*background-color: #fcfcfc;*/
     /*background-color: #F5F3EE;*/
-
     color: #474a41;
 }
 
@@ -52,64 +51,78 @@ h6 {
     font-size: .75em;
 }
 
-.element{
+.element {
     border-style: solid;
     border-color: yellow;
     border-width: 1px;
 }
 
-#title{
+.invisible{
+    display: none;
+}
+
+#startUp{
+    background-color: #474a41;
+}
+
+#startUp #title{
+    color: #fcfcfc;
+}
+
+#title {
     font-family: adam;
     font-size: 4.5em;
     color: #474a41;
     text-align: right;
+    padding: 0 1% 1% 1%;
 }
-.red{
+
+.red {
     color: red;
 }
 
 .mainSection {
     /*allows the main section to take up all available space pushing footer to the bottom*/
     flex: 1;
-    display:flex;
+    display: flex;
     flex-direction: column;
     justify-content: center;
     align-content: center;
 }
 
-.timer{
+.timer {
     font-size: 1.5em;
     text-align: left;
+    color: red;
+    padding: 1% 0 1% 2%;
 }
 
-.questionSection{
-    flex: 1;
+.questionSection {
+    flex: .75;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.questionText{
+.questionText {
     font-size: 4em;
     text-align: center;
 }
 
-.answerSection{
+.answerSection {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
     flex: 2;
 }
 
- .answer{
-    width:35%;
+.answer {
+    width: 35%;
     font-size: 2em;
     margin: 2%;
     padding: 1%;
-    
     display: flex;
     align-items: center;
-
     border-color: #474a41;
     border-style: solid;
     border-width: 2px;
@@ -121,6 +134,3 @@ h6 {
     padding: .5% 0 .5% 0;
     font-size: .75em;
 }
-
-
-

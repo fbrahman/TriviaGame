@@ -1,5 +1,6 @@
 var quiz = {
     correct: 0,
+    incorrect:0,
     totalQuestions: 5,
     questionArray: [],
     answerArray: [],
@@ -22,9 +23,13 @@ var quiz = {
                 $("<p>", { "class": "questionText", text: vQuestion, "qIndex":vIndex})
             )
         );
+
+        quiz.chooseAnswerOptions();
     },
 
     displayAnswers: function(){
+
+    	//prevent repeating choices -- still to do!
 
     	$(".answerSection").remove();
 
@@ -57,16 +62,18 @@ var quiz = {
 
     		if (vRandTF == true && vCorrectAnsdone === 0){
     			$(".answerSection").append(
-    				$("<div>", {"class": "answer", "id":"answer"+i, text: quiz.choicesArray.atextarray[vCorrectRand]})
+    				$("<div>", {"class": "answer", "id":"answer"+i,"status":"correct", text: quiz.choicesArray.atextarray[vCorrectRand]})
     			)
     			vCorrectAnsdone = 1;
     		}else if (vIncorrectAnsdone < 3){
     			$(".answerSection").append(
-    				$("<div>", {"class": "answer", "id":"answer"+i, text: quiz.choicesArray[vIncorrectRand].atextarray[vIncorrectTextRand]})
+    				$("<div>", {"class": "answer", "id":"answer"+i,"status":"incorrect", text: quiz.choicesArray[vIncorrectRand].atextarray[vIncorrectTextRand]})
     			);
     			vIncorrectAnsdone++;
-    		} //else closure
-    	} //for loop closure
+    		} 
+    	}
+
+    	quiz.checkUserInput(); 
     	
     },
     
@@ -106,10 +113,23 @@ var quiz = {
 
 		quiz.choicesArray = $.extend(true, vCorrectAnswers,vIncorrectAnswers);
 
+		quiz.displayAnswers();
+
     },
 
-    checkUserInput: function(question, userAnswer) {
+    checkUserInput: function() {
 
+    	$(".answer").click(function(){
+    		console.log($(this).attr("status"));
+    		if ($(this).attr("status") === "correct"){
+    			quiz.correct++;
+    		}else{
+    			quiz.incorrect++;
+    		}
+    	console.log(quiz.correct, quiz.incorrect);
+    	});
+
+    	
     },
 
     calculateScore: function(correct, totalQuestions) {
@@ -168,10 +188,13 @@ var quiz = {
 
 }
 
-// Testing randomization of array.
+
+// var testarray = [0, 1];
+
+// // Testing randomization of array.
 // var objResults = {} 
 // 	for(var i = 0; i < 1000000; i++){ 
-// 		var randomElement = quiz.questions[quiz.random(0, quiz.questions.length-1)] 
+// 		var randomElement = testarray[quiz.random(0, testarray.length-1)] 
 // 		if (objResults[randomElement]){ 
 // 			objResults[randomElement]++ 
 // 		}
