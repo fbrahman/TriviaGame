@@ -36,6 +36,10 @@ var quiz = {
         let vIndex = $(".questionText").attr("qIndex");
         let vCorrectAnsdone = 0;
         let vIncorrectAnsdone = 0;
+        let vChoiceArray = $.extend(true, {},quiz.choicesArray);
+
+        console.log("Copy of choice array",vChoiceArray);
+        console.log(typeof(vChoiceArray));
 
         var $elem = $(".mainSection");
 
@@ -53,22 +57,25 @@ var quiz = {
         for (i = 0; i < 8; i++) {
 
             let vRandTF = quiz.random(0, 1);
-            let vCorrectRand = quiz.random(0, quiz.choicesArray.atextarray.length - 1);
-            let vIncorrectRand = quiz.random(0, Object.keys(quiz.choicesArray).length - 3);
-            let vIncorrectTextRand = quiz.random(0, quiz.choicesArray[vIncorrectRand].atextarray.length - 1);
-
+            let vCorrectRand = quiz.random(0, vChoiceArray.atextarray.length - 1);
+            let vIncorrectRand = quiz.random(0, Object.keys(vChoiceArray).length - 3);
+            let vIncorrectTextRand = quiz.random(0, vChoiceArray[vIncorrectRand].atextarray.length - 1);
+            
             console.log("this is the incorrect rand", vIncorrectRand);
             console.log("this is the incorrect text rand", vIncorrectTextRand);
 
             if (vRandTF == true && vCorrectAnsdone === 0) {
                 $(".answerSection").append(
-                    $("<div>", { "class": "answer", "id": "answer" + i, "status": "correct", text: quiz.choicesArray.atextarray[vCorrectRand] })
+                    $("<div>", { "class": "answer", "id": "answer" + i, "status": "correct", text: vChoiceArray.atextarray[vCorrectRand] })
                 )
                 vCorrectAnsdone = 1;
             } else if (vIncorrectAnsdone < 3) {
                 $(".answerSection").append(
-                    $("<div>", { "class": "answer", "id": "answer" + i, "status": "incorrect","ipIndex":vIncorrectRand, "icIndex": vIncorrectTextRand, text: quiz.choicesArray[vIncorrectRand].atextarray[vIncorrectTextRand] })
+                    $("<div>", { "class": "answer", "id": "answer" + i, "status": "incorrect", "ipIndex": vIncorrectRand, "icIndex": vIncorrectTextRand, text: vChoiceArray[vIncorrectRand].atextarray[vIncorrectTextRand] })
                 );
+
+                delete vChoiceArray[vIncorrectRand].atextarray[vIncorrectTextRand];
+
                 vIncorrectAnsdone++;
             }
         }
