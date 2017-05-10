@@ -187,6 +187,8 @@ var quiz = {
 
 }
 
+quiz.displayRandQuestion();
+
 
 // var testarray = [0, 1];
 
