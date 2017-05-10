@@ -27,6 +27,7 @@ body {
     color: #474a41;
 }
 
+
 h1 {
     font-size: 2em;
 }
@@ -61,12 +62,30 @@ h6 {
     display: none;
 }
 
-#startUp{
+
+
+/*startPage Styling*/
+#startPage{
     background-color: #474a41;
+    color:#f2f2f2;
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
 }
 
-#startUp #title{
-    color: #fcfcfc;
+#startPage #title{
+    color: #f2f2f2;
+    text-align: center;
+}
+
+#instructions{
+    flex:1;
+}
+
+#gamePage{
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 #title {
