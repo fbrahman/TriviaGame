@@ -13,6 +13,11 @@ var quiz = {
     		$("#correctPage").toggleClass("invisible");
     	};
 
+    	if($("#gamePage").hasClass("invisible") && !$("#startPage").hasClass("invisible")){
+    		$("#gamePage").toggleClass("invisible");
+    		$("#startPage").toggleClass("invisible");
+    	};
+
         $(".questionSection").remove();
         $(".answerSection").remove();
 
@@ -212,7 +217,7 @@ var quiz = {
 
     reset: function (){
 
-    	quiz.timer.startTimer(90, "#timer");
+    	quiz.timer.startTimer(100, "#timer", quiz.displayRandQuestion);
 
     	$("#startQuiz").click(function(){
     		$("#startPage").toggleClass("invisible");
