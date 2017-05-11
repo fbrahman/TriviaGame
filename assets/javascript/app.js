@@ -7,7 +7,6 @@ var quiz = {
     choicesArray: [],
 
     displayScreen: function() {
-       
         if ($("#gamePage").hasClass("invisible") && !$("#startPage").hasClass("invisible")) {
             $("#gamePage").toggleClass("invisible");
             $("#startPage").toggleClass("invisible");
@@ -30,7 +29,6 @@ var quiz = {
     },
 
     displayRandQuestion: function() {
-
         quiz.displayScreen();
 
         $(".questionSection").remove();
@@ -48,12 +46,10 @@ var quiz = {
                 $("<p>", { "class": "questionText", text: vQuestion, "qIndex": vIndex })
             )
         );
-
         quiz.chooseAnswerOptions(); //go to function to create object of all possible correct and incorrect options
     },
 
     displayAnswers: function() {
-
         $(".answerSection").remove();
 
         let vIndex = $(".questionText").attr("qIndex");
@@ -71,7 +67,6 @@ var quiz = {
         );
 
         for (i = 0; i < 8; i++) {
-
             let vRandTF = quiz.random(0, 1);
             let vCorrectRand = quiz.random(0, vChoiceArray.atextarray.length - 1);
             let vIncorrectRand = quiz.random(0, Object.keys(vChoiceArray).length - 3);
@@ -96,16 +91,14 @@ var quiz = {
             }
         }
 
-        $("#gpTimer").empty(); //so the timer will not start with a zero and jump up to the beginning of the countdown.
+        quiz.timer.reset("#gpTimer");//so the timer will not start with a zero and jump up to the beginning of the countdown.
 
-        quiz.timer.startTimer(20,"#gpTimer",quiz.timesUpAnswer); //start timer for 15 seconds and once it runs out run the times up function.
+        quiz.timer.startTimer(20, "#gpTimer", quiz.timesUpAnswer); //start timer for 15 seconds and once it runs out run the times up function.
 
         quiz.checkUserInput(); //turn on event listener after the answers are displayed to check user input
-
     },
 
     chooseAnswerOptions: function() {
-
         let vIndex = $(".questionText").attr("qIndex");
         let vQType = quiz.questionArray[vIndex].qtype;
         let vCorrectAnswers = [];
@@ -140,54 +133,49 @@ var quiz = {
         quiz.choicesArray = $.extend(true, vCorrectAnswers, vIncorrectAnswers);
 
         quiz.displayAnswers(); // using the created array of correct/incorrect options go to display answer functionality to randomly pick one correct answer and 3 incorrect answers.
-
     },
 
     checkUserInput: function() {
-
         $(".answer").click(function() {
             console.log($(this).attr("status"));
             if ($(this).attr("status") === "correct") {
                 quiz.correct++;
+                quiz.timer.reset("#gpTimer");
                 quiz.correctAnswer();
 
             } else if ($(this).attr("status") === "incorrect") {
                 quiz.incorrect++;
+                quiz.timer.reset("#gpTimer");
                 quiz.incorrectAnswer();
-            } 
-            // else{
-            // 	quiz.incorrect++;
-            // 	quiz.timesUpAnswer();
-            // }
-
+            }
             console.log(quiz.correct, quiz.incorrect);
         });
-
-
     },
 
     calculateScore: function(correct, totalQuestions) {
-
     },
 
     incorrectAnswer: function() {
         $("#gamePage").toggleClass("invisible");
         $("#incorrectPage").toggleClass("invisible");
-        $("#ipTimer").empty();
+        // $("#ipTimer").empty();
+        quiz.timer.reset("#ipTimer");
         quiz.timer.startTimer(5, "#ipTimer", quiz.displayRandQuestion);
     },
 
     correctAnswer: function() {
         $("#gamePage").toggleClass("invisible");
         $("#correctPage").toggleClass("invisible");
-        $("#cpTimer").empty();
+        // $("#cpTimer").empty();
+        quiz.timer.reset("#cpTimer");
         quiz.timer.startTimer(5, "#cpTimer", quiz.displayRandQuestion);
     },
 
     timesUpAnswer: function() {
         $("#gamePage").toggleClass("invisible");
         $("#timesUpPage").toggleClass("invisible");
-        $("#tpTimer").empty();
+        // $("#tpTimer").empty();
+        quiz.timer.reset("#tpTimer");
         quiz.timer.startTimer(10, "#tpTimer", quiz.displayRandQuestion);
     },
 
@@ -200,12 +188,11 @@ var quiz = {
     },
 
     timer: {
-
-        time: 90,
-        timeInter: "",
+    	timeInter: "",
+    	vtimer: 0,
 
         startTimer: function(time, loc, callback) {
-            let vtimer = time;
+            vtimer = time;
             timeInter = setInterval(function() {
 
                 vtimer--;
@@ -215,9 +202,7 @@ var quiz = {
                 if (vtimer === 0) {
                     quiz.timer.stopTimer();
                     callback();
-
                 };
-
             }, 1000);
         },
 
@@ -228,6 +213,12 @@ var quiz = {
         displayTimer: function(loc, time) {
             $(loc).html(time);
         },
+
+        reset: function(loc){
+        	quiz.timer.stopTimer();
+        	vtimer = 0;
+        	$(loc).empty();
+        }
     },
 
     questions: function(type, text, count) {
@@ -244,17 +235,16 @@ var quiz = {
     },
 
     reset: function() {
-
         quiz.timer.startTimer(100, "#timer", quiz.displayRandQuestion);
 
         $("#startQuiz").click(function() {
             $("#startPage").toggleClass("invisible");
             $("#gamePage").toggleClass("invisible");
+            quiz.timer.stopTimer();
+            $("#gpTimer").empty();
             quiz.displayRandQuestion();
         })
-
     }
-
 }
 
 quiz.reset();
