@@ -8,6 +8,11 @@ var quiz = {
 
     displayRandQuestion: function() {
 
+    	if($("#gamePage").hasClass("invisible") && !$("#correctPage").hasClass("invisible")){
+    		$("#gamePage").toggleClass("invisible");
+    		$("#correctPage").toggleClass("invisible");
+    	};
+
         $(".questionSection").remove();
         $(".answerSection").remove();
 
@@ -127,6 +132,7 @@ var quiz = {
             console.log($(this).attr("status"));
             if ($(this).attr("status") === "correct") {
                 quiz.correct++;
+                quiz.correctAnswer();
 
             } else {
                 quiz.incorrect++;
@@ -146,7 +152,10 @@ var quiz = {
     },
 
     correctAnswer: function(){
-
+    	$("#gamePage").toggleClass("invisible");
+    	$("#correctPage").toggleClass("invisible");
+    	$("#cpTimer").empty();
+    	quiz.timer.startTimer(5, "#cpTimer", quiz.displayRandQuestion);
     },
 
     random: function(min, max) {
@@ -162,7 +171,7 @@ var quiz = {
         time: 90,
         timeInter: "",
 
-        startTimer: function(time, loc) {
+        startTimer: function(time, loc, callback) {
             let vtimer = time;
             timeInter = setInterval(function() {
 
@@ -172,6 +181,8 @@ var quiz = {
 
                 if (vtimer === 0) {
                     quiz.timer.stopTimer();
+                    callback();
+
                 };
 
             }, 1000);
@@ -200,6 +211,8 @@ var quiz = {
     },
 
     reset: function (){
+
+    	quiz.timer.startTimer(90, "#timer");
 
     	$("#startQuiz").click(function(){
     		$("#startPage").toggleClass("invisible");
