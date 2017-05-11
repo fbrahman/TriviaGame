@@ -24,12 +24,10 @@ var quiz = {
             )
         );
 
-        quiz.chooseAnswerOptions();
+        quiz.chooseAnswerOptions(); //go to function to create object of all possible correct and incorrect options
     },
 
     displayAnswers: function() {
-
-        //prevent repeating choices -- still to do!
 
         $(".answerSection").remove();
 
@@ -80,7 +78,7 @@ var quiz = {
             }
         }
 
-        quiz.checkUserInput();
+        quiz.checkUserInput(); //turn on event listener after the answers are display to check user input
 
     },
 
@@ -119,7 +117,7 @@ var quiz = {
 
         quiz.choicesArray = $.extend(true, vCorrectAnswers, vIncorrectAnswers);
 
-        quiz.displayAnswers();
+        quiz.displayAnswers(); // using the created array of correct/incorrect options go to display answer functionality
 
     },
 
@@ -129,6 +127,7 @@ var quiz = {
             console.log($(this).attr("status"));
             if ($(this).attr("status") === "correct") {
                 quiz.correct++;
+
             } else {
                 quiz.incorrect++;
             }
@@ -139,6 +138,14 @@ var quiz = {
     },
 
     calculateScore: function(correct, totalQuestions) {
+
+    },
+
+    incorrectAnswer: function(){
+
+    },
+
+    correctAnswer: function(){
 
     },
 
@@ -190,11 +197,21 @@ var quiz = {
         this.atype = type;
         this.atextarray = text;
         quiz.answerArray.push(this);
+    },
+
+    reset: function (){
+
+    	$("#startQuiz").click(function(){
+    		$("#startPage").toggleClass("invisible");
+    		$("#gamePage").toggleClass("invisible");
+    		quiz.displayRandQuestion();
+    	})
+
     }
 
 }
 
-quiz.displayRandQuestion();
+quiz.reset();
 
 
 // var testarray = [0, 1];
