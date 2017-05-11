@@ -6,17 +6,32 @@ var quiz = {
     answerArray: [],
     choicesArray: [],
 
+    displayScreen: function() {
+       
+        if ($("#gamePage").hasClass("invisible") && !$("#startPage").hasClass("invisible")) {
+            $("#gamePage").toggleClass("invisible");
+            $("#startPage").toggleClass("invisible");
+        };
+
+        if ($("#gamePage").hasClass("invisible") && !$("#correctPage").hasClass("invisible")) {
+            $("#gamePage").toggleClass("invisible");
+            $("#correctPage").toggleClass("invisible");
+        };
+
+        if ($("#gamePage").hasClass("invisible") && !$("#incorrectPage").hasClass("invisible")) {
+            $("#gamePage").toggleClass("invisible");
+            $("#incorrectPage").toggleClass("invisible");
+        };
+
+        if ($("#gamePage").hasClass("invisible") && !$("#timesUpPage").hasClass("invisible")) {
+            $("#gamePage").toggleClass("invisible");
+            $("#timesUpPage").toggleClass("invisible");
+        };
+    },
+
     displayRandQuestion: function() {
 
-    	if($("#gamePage").hasClass("invisible") && !$("#correctPage").hasClass("invisible")){
-    		$("#gamePage").toggleClass("invisible");
-    		$("#correctPage").toggleClass("invisible");
-    	};
-
-    	if($("#gamePage").hasClass("invisible") && !$("#startPage").hasClass("invisible")){
-    		$("#gamePage").toggleClass("invisible");
-    		$("#startPage").toggleClass("invisible");
-    	};
+        quiz.displayScreen();
 
         $(".questionSection").remove();
         $(".answerSection").remove();
@@ -44,9 +59,9 @@ var quiz = {
         let vIndex = $(".questionText").attr("qIndex");
         let vCorrectAnsdone = 0;
         let vIncorrectAnsdone = 0;
-        let vChoiceArray = $.extend(true, {},quiz.choicesArray);
+        let vChoiceArray = $.extend(true, {}, quiz.choicesArray);
 
-        console.log("Copy of choice array",vChoiceArray);
+        console.log("Copy of choice array", vChoiceArray);
         console.log(typeof(vChoiceArray));
 
         var $elem = $(".mainSection");
@@ -55,20 +70,13 @@ var quiz = {
             $("<div>", { "class": "answerSection" })
         );
 
-        // for(i = 0; i < 4; i++){
-
-        // 	$(".answerSection").append(
-        // 		$("<div>", {"class": "answer", "id":"answer"+i, text:quiz.answerArray[vIndex].atextarray[i]})
-        // 	)
-        // }
-
         for (i = 0; i < 8; i++) {
 
             let vRandTF = quiz.random(0, 1);
             let vCorrectRand = quiz.random(0, vChoiceArray.atextarray.length - 1);
             let vIncorrectRand = quiz.random(0, Object.keys(vChoiceArray).length - 3);
             let vIncorrectTextRand = quiz.random(0, vChoiceArray[vIncorrectRand].atextarray.length - 1);
-            
+
             console.log("this is the incorrect rand", vIncorrectRand);
             console.log("this is the incorrect text rand", vIncorrectTextRand);
 
@@ -88,7 +96,11 @@ var quiz = {
             }
         }
 
-        quiz.checkUserInput(); //turn on event listener after the answers are display to check user input
+        $("#gpTimer").empty(); //so the timer will not start with a zero and jump up to the beginning of the countdown.
+
+        quiz.timer.startTimer(20,"#gpTimer",quiz.timesUpAnswer); //start timer for 15 seconds and once it runs out run the times up function.
+
+        quiz.checkUserInput(); //turn on event listener after the answers are displayed to check user input
 
     },
 
@@ -127,7 +139,7 @@ var quiz = {
 
         quiz.choicesArray = $.extend(true, vCorrectAnswers, vIncorrectAnswers);
 
-        quiz.displayAnswers(); // using the created array of correct/incorrect options go to display answer functionality
+        quiz.displayAnswers(); // using the created array of correct/incorrect options go to display answer functionality to randomly pick one correct answer and 3 incorrect answers.
 
     },
 
@@ -139,9 +151,15 @@ var quiz = {
                 quiz.correct++;
                 quiz.correctAnswer();
 
-            } else {
+            } else if ($(this).attr("status") === "incorrect") {
                 quiz.incorrect++;
-            }
+                quiz.incorrectAnswer();
+            } 
+            // else{
+            // 	quiz.incorrect++;
+            // 	quiz.timesUpAnswer();
+            // }
+
             console.log(quiz.correct, quiz.incorrect);
         });
 
@@ -152,15 +170,25 @@ var quiz = {
 
     },
 
-    incorrectAnswer: function(){
-
+    incorrectAnswer: function() {
+        $("#gamePage").toggleClass("invisible");
+        $("#incorrectPage").toggleClass("invisible");
+        $("#ipTimer").empty();
+        quiz.timer.startTimer(5, "#ipTimer", quiz.displayRandQuestion);
     },
 
-    correctAnswer: function(){
-    	$("#gamePage").toggleClass("invisible");
-    	$("#correctPage").toggleClass("invisible");
-    	$("#cpTimer").empty();
-    	quiz.timer.startTimer(5, "#cpTimer", quiz.displayRandQuestion);
+    correctAnswer: function() {
+        $("#gamePage").toggleClass("invisible");
+        $("#correctPage").toggleClass("invisible");
+        $("#cpTimer").empty();
+        quiz.timer.startTimer(5, "#cpTimer", quiz.displayRandQuestion);
+    },
+
+    timesUpAnswer: function() {
+        $("#gamePage").toggleClass("invisible");
+        $("#timesUpPage").toggleClass("invisible");
+        $("#tpTimer").empty();
+        quiz.timer.startTimer(10, "#tpTimer", quiz.displayRandQuestion);
     },
 
     random: function(min, max) {
@@ -215,15 +243,15 @@ var quiz = {
         quiz.answerArray.push(this);
     },
 
-    reset: function (){
+    reset: function() {
 
-    	quiz.timer.startTimer(100, "#timer", quiz.displayRandQuestion);
+        quiz.timer.startTimer(100, "#timer", quiz.displayRandQuestion);
 
-    	$("#startQuiz").click(function(){
-    		$("#startPage").toggleClass("invisible");
-    		$("#gamePage").toggleClass("invisible");
-    		quiz.displayRandQuestion();
-    	})
+        $("#startQuiz").click(function() {
+            $("#startPage").toggleClass("invisible");
+            $("#gamePage").toggleClass("invisible");
+            quiz.displayRandQuestion();
+        })
 
     }
 

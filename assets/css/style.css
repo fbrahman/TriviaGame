@@ -109,17 +109,10 @@ h6 {
     text-align: right;
     padding: 2% 5% 0 3%;
     font-size: 1.3em;
-    /*margin: auto;*/
-/*    width: min-content;*/
 }
 
 #startQuiz:hover{
     font-weight: bold;
-/*    border-style: solid;
-    border-width: 1px;
-    border-color: red;*/
-
-    /*text-decoration: underline;*/
 }
 
 /*game page styling*/
@@ -150,11 +143,11 @@ h6 {
     align-content: center;
 }
 
-.timer {
+#gpTimer {
     font-size: 1.5em;
     text-align: left;
     color: red;
-    padding: 1% 0 1% 2%;
+    padding: 0 0 0 5%;
 }
 
 .questionSection {
@@ -230,11 +223,104 @@ h6 {
 
 #cpHeader{
     font-size: 4.5em;
-    padding: 0 1% 0 1%;
+    padding: 0 1% 0 3%;
 
 }
 
 #cpText{
+    text-align: justify;
+    line-height: 1.5em;
+    font-size: 1.4em;
+    padding: 0 5% 0 3%;
+}
+
+/*incorrect page styling*/
+#incorrectPage{
+    background-color: #474a41;
+    color:#f2f2f2;
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+}
+
+#incorrectPage #title{
+    color:#f2f2f2;
+
+}
+.ipMainSection{
+    flex:1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+#ipContent {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#ipTimer{
+    color: red;
+    font-size: 3em;
+    padding-top: 3%;
+    font-weight: bold;
+}
+
+#ipHeader{
+    font-size: 4.5em;
+    padding: 0 1% 0 3%;
+
+}
+
+#ipText{
+    text-align: justify;
+    line-height: 1.5em;
+    font-size: 1.4em;
+    padding: 0 5% 0 3%;
+}
+
+/*Time's up page styling*/
+#timesUpPage{
+    background-color: #474a41;
+    color:#f2f2f2;
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+}
+
+#timesUpPage #title{
+    color:#f2f2f2;
+
+}
+.tpMainSection{
+    flex:1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+#tpContent {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#tpTimer{
+    color: red;
+    font-size: 3em;
+    padding-top: 3%;
+    font-weight: bold;
+}
+
+#tpHeader{
+    font-size: 4.5em;
+    padding: 0 1% 0 3%;
+    white-space: nowrap;
+
+}
+
+#tpText{
     text-align: justify;
     line-height: 1.5em;
     font-size: 1.4em;
