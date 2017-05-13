@@ -160,7 +160,7 @@ var quiz = {
         $("#incorrectPage").toggleClass("invisible");
         // $("#ipTimer").empty();
         quiz.timer.reset("#ipTimer");
-        quiz.timer.startTimer(5, "#ipTimer", quiz.displayRandQuestion);
+        quiz.timer.startTimer(99, "#ipTimer", quiz.displayRandQuestion);
     },
 
     correctAnswer: function() {
@@ -168,7 +168,7 @@ var quiz = {
         $("#correctPage").toggleClass("invisible");
         // $("#cpTimer").empty();
         quiz.timer.reset("#cpTimer");
-        quiz.timer.startTimer(5, "#cpTimer", quiz.displayRandQuestion);
+        quiz.timer.startTimer(99, "#cpTimer", quiz.displayRandQuestion);
     },
 
     timesUpAnswer: function() {
@@ -176,7 +176,7 @@ var quiz = {
         $("#timesUpPage").toggleClass("invisible");
         // $("#tpTimer").empty();
         quiz.timer.reset("#tpTimer");
-        quiz.timer.startTimer(10, "#tpTimer", quiz.displayRandQuestion);
+        quiz.timer.startTimer(99, "#tpTimer", quiz.displayRandQuestion);
     },
 
     random: function(min, max) {
