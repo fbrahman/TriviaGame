@@ -16,7 +16,7 @@
             <div id="spContent">
                 <h1 id="title"> Tr<span class="red">i</span>v<span class="red">i</span>a Game</h1>
                 <p id="instructions">
-                    Welcome to the trivia game! You will be provided questions to test your knowledge of the subject matter. Keep an eye out for a count down timer that will look like this "<span id="timer"></span>" somewhere on the page. Answer the question before the timer reaches zero!
+                    Welcome to the trivia game! You will be provided questions to test your knowledge of the english language. Keep an eye out for a count down timer that will look like this "<span id="timer"></span>" somewhere on the page. Answer the question before the timer reaches zero!
                 </p>
             </div>
             <nav>
@@ -31,14 +31,14 @@
     </div>
     <div id="gamePage" class="invisible">
         <header>
-            <h1 id="title" class="element"> Tr<span class="red">i</span>v<span class="red">i</span>a Game</h1>
+            <h1 id="title"> Tr<span class="red">i</span>v<span class="red">i</span>a Game</h1>
         </header>
         <div id="gpTimer"></div>
-        <section class="mainSection element">
+        <section class="mainSection">
             <!-- populated by jQuery -->
         </section>
         <footer>
-            <div id="copyright" class="element">
+            <div id="copyright">
                 &#169; Copyright 2017 Fahad Rahman
             </div>
         </footer>
@@ -53,7 +53,7 @@
                     Co<span class="red">rr</span>ect!
                 </div>
                 <p id="cpText">
-                    You answered the question correct! Now prove that this was not a fluke! The next question will appear after the timer below reaches <span class="red">zero</span>.
+                    You answered the question correct! Now prove that this was not a fluke! The quiz will continue after the timer below reaches <span class="red">zero</span>.
                 </p>
             </div>
             <div id="cpTimer"></div>
@@ -74,7 +74,7 @@
                     In<span class="red">c</span>orre<span class="red">c</span>t!
                 </div>
                 <p id="ipText">
-                    You answered the question incorrectly. Don't lose hope and perservere on! The next question will appear after the timer below reaches <span class="red">zero</span>.
+                    You answered the question incorrectly. Don't lose hope and perservere on! The quiz will continue after the timer below reaches <span class="red">zero</span>.
                 </p>
             </div>
             <div id="ipTimer"></div>
@@ -96,7 +96,7 @@
                     T<span class="red">i</span>me's Up<span class="red">!</span>
                 </div>
                 <p id="tpText">
-                    You weren't paying attention and time ran out. I warned you! For practice please pay attention to the timer below! The question will appear when the timer reaches <span class="red">zero</span>.
+                    You weren't paying attention and time ran out. I warned you! For practice please pay attention to the timer below! The quiz will continue when the timer reaches <span class="red">zero</span>.
                 </p>
             </div>
             <div id="tpTimer"></div>
@@ -114,10 +114,10 @@
         <section class="opMainSection">
             <div id="opContent">
                 <div id="opHeader">
-                    Completed!
+                    Com<span class="red">p</span>lete<span class="red">d</span>!
                 </div>
                 <p id="opText">
-                    You've gone through all of the questions! Press replay to play again!
+                    You've gone through all of the questions! You got <span class="red" id="score"></span> out of <span class="red" id="totalQuestions"></span> correct. Press replay to play again!
                 </p>
             </div>
             <nav>
