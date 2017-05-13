@@ -1,7 +1,7 @@
 var quiz = {
     correct: 0,
     incorrect: 0,
-    totalQuestions: 5,
+    totalQuestions: 7,
     totalQuestionsAsked: 0,
     questionArray: [],
     answerArray: [],
@@ -110,7 +110,7 @@ var quiz = {
             $("<div>", { "class": "answerSection" })
         );
 
-        for (i = 0; i < 8; i++) {
+        for (i = 0; i < 9; i++) {
             let vRandTF = quiz.random(0, 1);
             let vCorrectRand = quiz.random(0, vChoiceArray.atextarray.length - 1);
             let vIncorrectRand = quiz.random(0, Object.keys(vChoiceArray).length - 3);

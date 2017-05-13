@@ -1,11 +1,11 @@
-var question1 = new quiz.questions("noun", "Please select noun:", 1);
-var question2 = new quiz.questions("pronoun", "Please select pronoun:", 2);
-var question3 = new quiz.questions("adjective", "Please select adjective:", 3);
-var question4 = new quiz.questions("verb", "Please select verb:", 4);
-var question5 = new quiz.questions("adverb", "Please select adverb:", 5);
-var question6 = new quiz.questions("preposition", "Please select preposition:", 6);
-var question7 = new quiz.questions("conjunction", "Please select conjunction:", 7);
-var question8 = new quiz.questions("interjection", "Please select interjection:", 8);
+var question1 = new quiz.questions("noun", "Please select the noun:", 1);
+var question2 = new quiz.questions("pronoun", "Please select the pronoun:", 2);
+var question3 = new quiz.questions("adjective", "Please select the adjective:", 3);
+var question4 = new quiz.questions("verb", "Please select the verb:", 4);
+var question5 = new quiz.questions("adverb", "Please select the adverb:", 5);
+var question6 = new quiz.questions("preposition", "Please select the preposition:", 6);
+var question7 = new quiz.questions("conjunction", "Please select the conjunction:", 7);
+var question8 = new quiz.questions("interjection", "Please select the interjection:", 8);
 
 var answer1 = new quiz.answers("noun");
 var answer2 = new quiz.answers("pronoun");
