@@ -31,14 +31,14 @@
     </div>
     <div id="gamePage" class="invisible">
         <header>
-            <h1 id="title" class="element"> Tr<span class="red">i</span>v<span class="red">i</span>a Game</h1>
+            <h1 id="title"> Tr<span class="red">i</span>v<span class="red">i</span>a Game</h1>
         </header>
         <div id="gpTimer"></div>
-        <section class="mainSection element">
+        <section class="mainSection">
             <!-- populated by jQuery -->
         </section>
         <footer>
-            <div id="copyright" class="element">
+            <div id="copyright">
                 &#169; Copyright 2017 Fahad Rahman
             </div>
         </footer>
@@ -96,7 +96,7 @@
                     T<span class="red">i</span>me's Up<span class="red">!</span>
                 </div>
                 <p id="tpText">
-                    You weren't paying attention and time ran out. I warned you! For practice please pay attention to the timer below! The question will appear when the timer reaches <span class="red">zero</span>.
+                    You weren't paying attention and time ran out. I warned you! For practice please pay attention to the timer below! The next question will appear when the timer reaches <span class="red">zero</span>.
                 </p>
             </div>
             <div id="tpTimer"></div>
@@ -117,7 +117,7 @@
                     Completed!
                 </div>
                 <p id="opText">
-                    You've gone through all of the questions! Press replay to play again!
+                    You've gone through all of the questions! You got <span class="red" id="score"></span> out of <span class="red" id="totalQuestions"></span> correct. Press replay to play again!
                 </p>
             </div>
             <nav>
